@@ -12,19 +12,33 @@ class CartSummaryBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      color: Colors.orange.shade100,
+    final theme = Theme.of(context);
+    return BottomAppBar(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '$totalItems Item | Rp $totalPrice',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Total ($totalItems item)', style: theme.textTheme.bodyMedium),
+              Text(
+                'Rp $totalPrice',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+            ],
           ),
-          ElevatedButton(
+          FilledButton.icon(
             onPressed: totalItems == 0 ? null : () {},
-            child: const Text('Checkout'),
+            icon: const Icon(Icons.shopping_cart_checkout),
+            label: const Text('Checkout', style: TextStyle(fontSize: 16)),
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
           ),
         ],
       ),

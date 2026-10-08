@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/app_header.dart';
 import '../widgets/category_chip.dart';
 import '../widgets/food_tile.dart';
 import '../widgets/cart_summary_bar.dart';
@@ -26,44 +25,53 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const AppHeader(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    CategoryChip(
-                      label: 'Semua',
-                      isSelected: _selectedCategory == 'Semua',
-                      onTap: () => setState(() => _selectedCategory = 'Semua'),
-                    ),
-                    CategoryChip(
-                      label: 'Promo',
-                      isSelected: _selectedCategory == 'Promo',
-                      onTap: () => setState(() => _selectedCategory = 'Promo'),
-                    ),
-                  ],
-                ),
-              ),
+      appBar: AppBar(
+        title: const Text('MakanKuy!', style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              'Mau pesan apa hari ini?',
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            Expanded(
-              child: ListView(
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 children: [
-                  FoodTile(name: 'Ayam Geprek Sambal Matah', price: 20000, onAdd: () => _addToCart(20000)),
-                  FoodTile(name: 'Nasi Goreng Spesial', price: 18000, onAdd: () => _addToCart(18000)),
-                  FoodTile(name: 'Es Teh Manis', price: 5000, onAdd: () => _addToCart(5000)),
+                  CategoryChip(
+                    label: 'Semua',
+                    isSelected: _selectedCategory == 'Semua',
+                    onTap: () => setState(() => _selectedCategory = 'Semua'),
+                  ),
+                  CategoryChip(
+                    label: 'Promo',
+                    isSelected: _selectedCategory == 'Promo',
+                    onTap: () => setState(() => _selectedCategory = 'Promo'),
+                  ),
                 ],
               ),
             ),
-            CartSummaryBar(totalItems: _totalItems, totalPrice: _totalPrice),
-          ],
-        ),
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                FoodTile(name: 'Ayam Geprek Sambal Matah', price: 20000, onAdd: () => _addToCart(20000)),
+                FoodTile(name: 'Nasi Goreng Spesial', price: 18000, onAdd: () => _addToCart(18000)),
+                FoodTile(name: 'Es Teh Manis', price: 5000, onAdd: () => _addToCart(5000)),
+              ],
+            ),
+          ),
+        ],
       ),
+      bottomNavigationBar: CartSummaryBar(totalItems: _totalItems, totalPrice: _totalPrice),
     );
   }
 }
