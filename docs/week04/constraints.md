@@ -1,16 +1,16 @@
 # H2 - Constraint Diagnosis
 
-### Error 1: Right Overflow pada Teks (Teks Kepanjangan)
-* **Screenshot:** ![Error 1](error1.png)
-* **Rule violated:** `Row` memberikan *unbounded width* (ruang horizontal tak terbatas) kepada anak-anaknya. Widget `Text` mencoba mengambil semua ruang untuk teks panjangnya sehingga menabrak batas maksimal layar.
-* **Fix:** Membungkus widget `Text` tersebut dengan `Expanded` (agar ukurannya dibatasi oleh sisa ruang) dan menambahkan `maxLines: 2` serta `overflow: TextOverflow.ellipsis`.
+### Error 1: Right Overflow pada Header (Teks Kepanjangan)
+* **Screenshot:** ! [Error 1](error1.png)
+* **Rule violated:** `Row` di dalam `AppHeader` memberikan *unbounded width* kepada anak-anaknya. Widget `Text` mencoba merender kalimat panjang "MakanKuy! Cabang..." secara utuh sehingga menabrak batas maksimal layar kanan.
+* **Fix:** Membungkus widget `Text` tersebut dengan `Expanded` dan menambahkan `maxLines: 2` serta `overflow: TextOverflow.ellipsis` agar ukuran teks dibatasi oleh sisa ruang.
 
-### Error 2: Right Overflow pada Kategori (CategoryBar Terpotong)
-* **Screenshot:** ![Error 2](error2.png)
-* **Rule violated:** `Row` menyusun kumpulan *chip* secara horizontal secara statis. Total lebar semua *chip* melebihi batas maksimal layar (*screen constraint*).
-* **Fix:** Membungkus `Row` yang berisi *chip* tersebut dengan `SingleChildScrollView` dan mengatur arah scroll menjadi horizontal (`scrollDirection: Axis.horizontal`).
+### Error 2: Right Overflow pada Kategori (Chip Terpotong)
+* **Screenshot:** ! [Error 2](error2.png)
+* **Rule violated:** `Row` di `CategoryChipBar` menyusun deretan *Chip* kategori secara horizontal dan statis. Total lebar gabungan semua *chip* melebihi batas maksimal lebar layar.
+* **Fix:** Membungkus `Row` tersebut dengan `SingleChildScrollView` dan mengatur `scrollDirection: Axis.horizontal` agar kategori bisa digeser (*scrollable*) dan tidak menabrak batas.
 
-### Error 3: Bottom Overflow pada Layar (Tertutup Keyboard)
-* **Screenshot:** ![Error 3](error3.png)
-* **Rule violated:** `Column` mencoba me-render konten statis secara vertikal melebihi tinggi layar. Saat keyboard muncul, tinggi area yang tersedia mengecil, menyebabkan konten bagian bawah menabrak batas.
-* **Fix:** Mengubah struktur layout dari `Column` statis menjadi `CustomScrollView` (menggunakan *Slivers*) agar seluruh konten menjadi fleksibel dan *scrollable*.
+### Error 3: Bottom Overflow pada Layar (Tertabrak Keyboard)
+* **Screenshot:** ! [Error 3](error3.png)
+* **Rule violated:** Layar utama menggunakan `Column` statis yang mencoba me-render konten vertikal melebihi tinggi layar. Saat keyboard muncul, area layar yang tersedia mengecil drastis, menyebabkan konten bawah (daftar menu) menabrak batas layar.
+* **Fix:** Mengubah kerangka *layout* dari `Column` menjadi `CustomScrollView` dengan *Slivers* agar seluruh halaman menjadi fleksibel dan layar bisa digulir saat keyboard muncul.
