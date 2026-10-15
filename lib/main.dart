@@ -15,29 +15,36 @@ class MenuItem {
   });
 }
 
-const List<MenuItem> defaultMenu = [
-  MenuItem(id: '1', name: 'Ayam Geprek Sambal Matah', price: 20000, category: 'Makanan'),
-  MenuItem(id: '2', name: 'Nasi Goreng Spesial', price: 18000, category: 'Makanan'),
-  MenuItem(id: '3', name: 'Es Teh Manis', price: 5000, category: 'Minuman'),
-  MenuItem(id: '4', name: 'Pisang Goreng Keju', price: 12000, category: 'Promo'),
-];
+final List<MenuItem> menuData = List.generate(
+  500, // Syarat H1: 500 items
+      (i) => MenuItem(
+    id: 'm$i',
+    // Syarat H1: Teks lebih dari 200 karakter pada item pertama
+    name: i == 0
+        ? 'Ayam Geprek Spesial Ekstra Pedas Sambal Matah dengan Tambahan Nasi Uduk Hangat, Sate Usus Goreng Kering, Kerupuk Bawang Renyah, Sayur Lalapan Segar, Irisan Tomat, dan Taburan Bawang Goreng Melimpah Ruah Khas Nusantara'
+        : 'Menu Z Kuy Lezat Nomor ${i + 1}',
+    price: 15000 + (i * 500),
+    category: ['Semua', 'Promo', 'Makanan', 'Minuman'][i % 4],
+  ),
+);
 
 void main() {
   runApp(const Lab04App());
 }
 
 class Lab04App extends StatelessWidget {
-  final List<MenuItem>? items;
+  // ThemeMode ini bisa dikendalikan oleh file lab04_test
   final ThemeMode? themeMode;
+  final List<MenuItem>? items;
 
-  // Parameter ini menangkap settingan dari lab04_test
-  const Lab04App({super.key, this.items, this.themeMode});
+  const Lab04App({super.key, this.themeMode, this.items});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AFL 1 MakanKuy!',
+      title: 'Z Kuy!',
       debugShowCheckedModeBanner: false,
+
       themeMode: themeMode ?? ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
@@ -47,7 +54,7 @@ class Lab04App extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange, brightness: Brightness.dark),
       ),
-      home: MainScreen(items: items ?? defaultMenu),
+      home: MainScreen(items: items ?? menuData),
     );
   }
 }
