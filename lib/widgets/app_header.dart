@@ -5,15 +5,29 @@ class AppHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(16.0),
-      color: Colors.orange,
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primary,
+        borderRadius: BorderRadius.circular(12), // Sedikit dipercantik
+      ),
       width: double.infinity,
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('MakanKuy!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-          Text('Mau pesan apa hari ini?', style: TextStyle(color: Colors.white)),
+          Text('MakanKuy!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: theme.colorScheme.onPrimary)),
+          const SizedBox(height: 4),
+          // Memastikan teks tidak kepanjangan (overflow)
+          Expanded(
+            flex: 0,
+            child: Text(
+              'Mau pesan apa hari ini? Cabang Perintis siap melayani 24 Jam nonstop.',
+              style: TextStyle(color: theme.colorScheme.onPrimary),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );

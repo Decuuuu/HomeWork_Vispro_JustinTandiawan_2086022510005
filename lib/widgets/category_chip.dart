@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
 
-class CategoryChip extends StatelessWidget {
-  const CategoryChip({
-    super.key,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
+// Class ini kita namakan CategoryChipBar agar cocok dengan main_screen
+class CategoryChipBar extends StatelessWidget {
+  final List<String> categories;
+  final String selectedCategory;
+  final Function(String) onSelected;
 
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
+  const CategoryChipBar({
+    super.key,
+    required this.categories,
+    required this.selectedCategory,
+    required this.onSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: ChoiceChip(
-        label: Text(label),
-        selected: isSelected,
-        onSelected: (_) => onTap(),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: categories.map((category) {
+          final isSelected = category == selectedCategory;
+          return Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ChoiceChip(
+              label: Text(category),
+              selected: isSelected,
+              onSelected: (bool selected) {
+                if (selected) onSelected(category);
+              },
+            ),
+          );
+        }).toList(),
       ),
     );
   }
