@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
 class CartSummaryBar extends StatelessWidget {
+  final int totalItems;
+  final int totalPrice;
+  final VoidCallback? onOrder;
+
   const CartSummaryBar({
     super.key,
     required this.totalItems,
     required this.totalPrice,
+    this.onOrder,
   });
-
-  final int totalItems;
-  final int totalPrice;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // SafeArea wajib ada untuk menahan Gesture Bar bawah (Syarat Bonus)
     return SafeArea(
       child: BottomAppBar(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -39,8 +40,9 @@ class CartSummaryBar extends StatelessWidget {
               ),
             ),
             FilledButton.icon(
-              key: const Key('order-button'), // Wajib ada untuk Test No. 8 & Bonus
-              onPressed: totalItems == 0 ? null : () {},
+              key: const Key('order-button'),
+              // JIKA total item 0, tombol mati. Jika ada, jalankan onOrder
+              onPressed: totalItems == 0 ? null : onOrder,
               icon: const Icon(Icons.shopping_cart_checkout),
               label: const Text('Pesan', style: TextStyle(fontSize: 16)),
               style: FilledButton.styleFrom(

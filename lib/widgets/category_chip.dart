@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Class ini kita namakan CategoryChipBar agar cocok dengan main_screen
 class CategoryChipBar extends StatelessWidget {
   final List<String> categories;
   final String selectedCategory;

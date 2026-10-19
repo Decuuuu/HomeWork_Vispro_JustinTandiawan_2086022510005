@@ -10,7 +10,7 @@ class AppHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: theme.colorScheme.primary,
-        borderRadius: BorderRadius.circular(12), // Sedikit dipercantik
+        borderRadius: BorderRadius.circular(12),
       ),
       width: double.infinity,
       child: Column(
@@ -18,7 +18,6 @@ class AppHeader extends StatelessWidget {
         children: [
           Text('MakanKuy!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: theme.colorScheme.onPrimary)),
           const SizedBox(height: 4),
-          // Memastikan teks tidak kepanjangan (overflow)
           Expanded(
             flex: 0,
             child: Text(
