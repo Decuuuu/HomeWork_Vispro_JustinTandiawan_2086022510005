@@ -1,17 +1,23 @@
-# afl1_vispro
+# Makan Z Kuy! 
 
-A new Flutter project.
+Project AFL 1 Visual Programming - Track B (Directory & Explorer).
 
-## Getting Started
+## Deskripsi Singkat
+Makan Z Kuy adalah aplikasi katalog menu makanan sederhana. Aplikasi ini dibuat untuk memenuhi kriteria tugas AFL 1, dengan fokus pada kode yang rapi, UI responsif, dan penggunaan Material 3.
 
-This project is a starting point for a Flutter application.
+## Fitur Aplikasi
+- **3 Layar (Screen):** Home (Daftar Menu), Detail Makanan, dan Checkout.
+- **Responsif:** Tampilan akan berubah menjadi Grid dan memunculkan Sidebar jika dibuka di Tablet/Web. Di HP, menggunakan laci (Drawer).
+- **Dark Mode:** Tema warna bisa berubah menjadi gelap (bisa klik tombol bulan/matahari di pojok kanan atas).
+- **Long List (500 Data):** Bisa menampung 500 daftar makanan tanpa lag (menggunakan lazy loading).
+- **Aman dari Overflow:** Menggunakan CustomScrollView agar konten tidak menabrak keyboard saat pencarian.
 
-A few resources to get you started if this is your first Flutter project:
+## Cara Menjalankan
+1. Pastikan sudah install Flutter.
+2. Buka terminal di dalam folder project ini.
+3. Jalankan perintah `flutter pub get` untuk update library.
+4. Jalankan perintah `flutter run` (atau klik Run di VS Code/Android Studio).
+5. Untuk build APK: `flutter build apk --release`
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Catatan Tambahan
+Struktur folder dan laporan refleksi mingguan (H1 & H2) bisa dilihat di dalam folder `docs/`.
